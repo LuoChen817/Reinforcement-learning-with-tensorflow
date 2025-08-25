@@ -29,7 +29,8 @@ MAZE_W = 4  # grid width
 class Maze(tk.Tk, object):
     def __init__(self):
         super(Maze, self).__init__()
-        self.action_space = ['u', 'd', 'l', 'r']
+        # 定义动作空间
+        self.action_space = ['u', 'd', 'r', 'l']
         self.n_actions = len(self.action_space)
         self.title('maze')
         self.geometry('{0}x{1}'.format(MAZE_W * UNIT, MAZE_H * UNIT))
@@ -48,36 +49,35 @@ class Maze(tk.Tk, object):
             x0, y0, x1, y1 = 0, r, MAZE_W * UNIT, r
             self.canvas.create_line(x0, y0, x1, y1)
 
-        # create origin
+        # 原点(0,0) -> 左上角
         origin = np.array([20, 20])
 
-        # hell
+        # hell (障碍物)
         hell1_center = origin + np.array([UNIT * 2, UNIT])
         self.hell1 = self.canvas.create_rectangle(
             hell1_center[0] - 15, hell1_center[1] - 15,
             hell1_center[0] + 15, hell1_center[1] + 15,
             fill='black')
-        # hell
+
         hell2_center = origin + np.array([UNIT, UNIT * 2])
         self.hell2 = self.canvas.create_rectangle(
             hell2_center[0] - 15, hell2_center[1] - 15,
             hell2_center[0] + 15, hell2_center[1] + 15,
             fill='black')
 
-        # create oval
-        oval_center = origin + UNIT * 2
+        # 终点 (2,2)
+        oval_center = origin + np.array([UNIT * 2, UNIT * 2])
         self.oval = self.canvas.create_oval(
             oval_center[0] - 15, oval_center[1] - 15,
             oval_center[0] + 15, oval_center[1] + 15,
             fill='yellow')
 
-        # create red rect
+        # 创建红色方块（智能体）
         self.rect = self.canvas.create_rectangle(
             origin[0] - 15, origin[1] - 15,
             origin[0] + 15, origin[1] + 15,
             fill='red')
 
-        # pack all
         self.canvas.pack()
 
     def reset(self):
@@ -89,60 +89,61 @@ class Maze(tk.Tk, object):
             origin[0] - 15, origin[1] - 15,
             origin[0] + 15, origin[1] + 15,
             fill='red')
-        # return observation
-        return self.canvas.coords(self.rect)
+        # 返回初始状态 (0,0)
+        return (0, 0)
 
     def step(self, action):
-        s = self.canvas.coords(self.rect)
-        base_action = np.array([0, 0])
-        if action == 0:   # up
-            if s[1] > UNIT:
-                base_action[1] -= UNIT
-        elif action == 1:   # down
-            if s[1] < (MAZE_H - 1) * UNIT:
-                base_action[1] += UNIT
-        elif action == 2:   # right
-            if s[0] < (MAZE_W - 1) * UNIT:
-                base_action[0] += UNIT
-        elif action == 3:   # left
-            if s[0] > UNIT:
-                base_action[0] -= UNIT
+        # 当前像素坐标
+        s = self.canvas.coords(self.rect)  # [x1, y1, x2, y2]
+        col = int((s[0] - 5) // UNIT)   # 格子列索引
+        row = int((s[1] - 5) // UNIT)   # 格子行索引
 
-        self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
+        # 动作对应的坐标变化
+        if action == 0 and row > 0:        # up
+            row -= 1
+        elif action == 1 and row < MAZE_H-1:  # down
+            row += 1
+        elif action == 2 and col < MAZE_W-1:  # right
+            col += 1
+        elif action == 3 and col > 0:      # left
+            col -= 1
 
-        s_ = self.canvas.coords(self.rect)  # next state
+        # 移动像素
+        new_x = col * UNIT + 20
+        new_y = row * UNIT + 20
+        self.canvas.coords(self.rect,
+            new_x - 15, new_y - 15,
+            new_x + 15, new_y + 15)
 
-        # reward function
-        if s_ == self.canvas.coords(self.oval):
-            reward = 1
-            done = True
-            s_ = 'terminal'
-        elif s_ in [self.canvas.coords(self.hell1), self.canvas.coords(self.hell2)]:
-            reward = -1
-            done = True
-            s_ = 'terminal'
+        # 奖励与终止判断
+        if (row, col) == (2, 2):   # 到达终点
+            reward, done = 1, True
+        elif (row, col) in [(1, 2), (2, 1)]:  # 陷阱
+            reward, done = -1, True
         else:
-            reward = 0
-            done = False
+            reward, done = 0, False
 
-        return s_, reward, done
+        return (row, col), reward, done
 
     def render(self):
-        time.sleep(0.1)
+        time.sleep(0.3)
         self.update()
 
 
-def update():
-    for t in range(10):
+def update(n_round):
+    for episode in range(n_round):
         s = env.reset()
         while True:
             env.render()
-            a = 1
-            s, r, done = env.step(a)
+            a = np.random.choice([0,1,2,3])   # 随机动作
+            s_, r, done = env.step(a)
+            print("round:" + str(episode) +" " + f"state:{s} action:{a} -> state':{s_}, reward:{r}")
+            s = s_
             if done:
                 break
 
 if __name__ == '__main__':
+    n_round = 10
     env = Maze()
-    env.after(100, update)
+    env.after(100, update(n_round))
     env.mainloop()
