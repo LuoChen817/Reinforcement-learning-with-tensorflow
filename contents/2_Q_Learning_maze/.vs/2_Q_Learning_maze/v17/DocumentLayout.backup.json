@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\run_this.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:run_this.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\RL_brain.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RL_brain.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\maze_env.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:maze_env.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "run_this.py",
+              "DocumentMoniker": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\run_this.py",
+              "RelativeDocumentMoniker": "run_this.py",
+              "ToolTip": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\run_this.py",
+              "RelativeToolTip": "run_this.py",
+              "ViewState": "AgIAACIAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-25T07:32:23.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RL_brain.py",
+              "DocumentMoniker": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\RL_brain.py",
+              "RelativeDocumentMoniker": "RL_brain.py",
+              "ToolTip": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\RL_brain.py",
+              "RelativeToolTip": "RL_brain.py",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-25T07:32:23.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "maze_env.py",
+              "DocumentMoniker": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\maze_env.py",
+              "RelativeDocumentMoniker": "maze_env.py",
+              "ToolTip": "D:\\gitCode\\Reinforcement-learning-with-tensorflow\\contents\\2_Q_Learning_maze\\maze_env.py",
+              "RelativeToolTip": "maze_env.py",
+              "ViewState": "AgIAAEwAAAAAAAAAAADgv18AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-25T07:32:22.946Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
