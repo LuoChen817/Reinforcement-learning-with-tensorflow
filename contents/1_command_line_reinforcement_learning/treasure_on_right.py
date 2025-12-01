@@ -27,7 +27,7 @@ def build_q_table(n_states, actions):
         np.zeros((n_states, len(actions))),     # q_table initial values
         columns=actions,    # actions's name
     )
-    # print(table)    # show table
+    print(table)    # show table
     return table
 
 

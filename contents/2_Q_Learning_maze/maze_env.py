@@ -26,19 +26,19 @@ MAZE_H = 4  # grid height
 MAZE_W = 4  # grid width
 
 
-class Maze(tk.Tk, object):
+class Maze(tk.Tk, object): # 继承自tkinter的Tk类，表示一个迷宫环境
     def __init__(self):
         super(Maze, self).__init__()
-        self.action_space = ['u', 'd', 'l', 'r']
-        self.n_actions = len(self.action_space)
-        self.title('maze')
-        self.geometry('{0}x{1}'.format(MAZE_W * UNIT, MAZE_H * UNIT))
-        self._build_maze()
+        self.action_space = ['u', 'd', 'l', 'r'] # 动作空间，包含上下左右四个移动方向
+        self.n_actions = len(self.action_space) # 动作数量
+        self.title('maze') # 窗口标题
+        self.geometry('{0}x{1}'.format(MAZE_W * UNIT, MAZE_H * UNIT)) # 窗口大小，，{0}x{1}表示宽x高，.format用于格式化字符串
+        self._build_maze() # 调用_build_maze方法构建迷宫
 
     def _build_maze(self):
         self.canvas = tk.Canvas(self, bg='white',
                            height=MAZE_H * UNIT,
-                           width=MAZE_W * UNIT)
+                           width=MAZE_W * UNIT) # 创建一个画布，指定背景色为白色，宽度和高度分别为迷宫宽度和高度乘以单位长度
 
         # create grids
         for c in range(0, MAZE_W * UNIT, UNIT):
@@ -46,10 +46,10 @@ class Maze(tk.Tk, object):
             self.canvas.create_line(x0, y0, x1, y1)
         for r in range(0, MAZE_H * UNIT, UNIT):
             x0, y0, x1, y1 = 0, r, MAZE_W * UNIT, r
-            self.canvas.create_line(x0, y0, x1, y1)
+            self.canvas.create_line(x0, y0, x1, y1) # 两个for循环用于在画布上绘制网格线，形成迷宫的格子结构
 
         # create origin
-        origin = np.array([20, 20])
+        origin = np.array([20, 20]) # 原点坐标，表示迷宫左上角第一个格子的中心位置
 
         # hell
         hell1_center = origin + np.array([UNIT * 2, UNIT])
@@ -63,22 +63,23 @@ class Maze(tk.Tk, object):
             hell2_center[0] - 15, hell2_center[1] - 15,
             hell2_center[0] + 15, hell2_center[1] + 15,
             fill='black')
+        # hell_center表示两个洞的位置，分别位于迷宫的(2,1)和(1,2)格子中间。使用create_rectangle方法在画布上绘制两个黑色矩形，表示洞。
 
         # create oval
         oval_center = origin + UNIT * 2
         self.oval = self.canvas.create_oval(
             oval_center[0] - 15, oval_center[1] - 15,
             oval_center[0] + 15, oval_center[1] + 15,
-            fill='yellow')
+            fill='yellow') # oval_center表示终点的位置，位于迷宫的(2,2)格子中间。使用create_oval方法在画布上绘制一个黄色圆形，表示终点。
 
         # create red rect
         self.rect = self.canvas.create_rectangle(
             origin[0] - 15, origin[1] - 15,
             origin[0] + 15, origin[1] + 15,
-            fill='red')
+            fill='red') # 创建红色矩形，表示智能体的初始位置，位于迷宫的(0,0)格子中间。
 
         # pack all
-        self.canvas.pack()
+        self.canvas.pack() # 将画布添加到窗口中进行显示
 
     def reset(self):
         self.update()
