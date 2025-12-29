@@ -81,7 +81,7 @@ class Maze(tk.Tk, object): # 继承自tkinter的Tk类，表示一个迷宫环境
         # pack all
         self.canvas.pack() # 将画布添加到窗口中进行显示
 
-    def reset(self):
+    def reset(self): # 重置环境的方法
         self.update()
         time.sleep(0.5)
         self.canvas.delete(self.rect)
@@ -91,14 +91,14 @@ class Maze(tk.Tk, object): # 继承自tkinter的Tk类，表示一个迷宫环境
             origin[0] + 15, origin[1] + 15,
             fill='red')
         # return observation
-        return self.canvas.coords(self.rect)
+        return self.canvas.coords(self.rect) # 重置环境的方法，首先调用update方法刷新窗口，然后暂停0.5秒。接着删除当前的红色矩形，并重新创建一个新的红色矩形，表示智能体回到初始位置。最后返回智能体的坐标作为初始状态。
 
     def step(self, action):
-        s = self.canvas.coords(self.rect)
-        base_action = np.array([0, 0])
+        s = self.canvas.coords(self.rect) # 获取当前智能体的坐标作为状态s
+        base_action = np.array([0, 0]) # 初始化基本动作为[0,0]
         if action == 0:   # up
             if s[1] > UNIT:
-                base_action[1] -= UNIT
+                base_action[1] -= UNIT # 根据动作选择更新基本动作。如果动作是0（上），且当前y坐标大于UNIT，则将基本动作的y分量减去UNIT，实现向上移动。
         elif action == 1:   # down
             if s[1] < (MAZE_H - 1) * UNIT:
                 base_action[1] += UNIT
@@ -130,10 +130,10 @@ class Maze(tk.Tk, object): # 继承自tkinter的Tk类，表示一个迷宫环境
 
     def render(self):
         time.sleep(0.1)
-        self.update()
+        self.update() # 渲染环境的方法，通过调用update方法刷新窗口，实现动画效果
 
 
-def update():
+def update(): # 更新环境的函数
     for t in range(10):
         s = env.reset()
         while True:
@@ -141,7 +141,7 @@ def update():
             a = 1
             s, r, done = env.step(a)
             if done:
-                break
+                break # 在这个函数中，首先重置环境，然后在一个循环中不断渲染环境，执行动作，并获取下一个状态、奖励和是否结束的标志。如果结束则跳出循环，开始下一次迭代。
 
 if __name__ == '__main__':
     env = Maze()

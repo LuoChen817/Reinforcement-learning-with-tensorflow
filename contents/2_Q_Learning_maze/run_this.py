@@ -14,12 +14,12 @@ View more on my tutorial page: https://morvanzhou.github.io/tutorials/
 
 from maze_env import Maze
 from RL_brain import QLearningTable
-
+import time # 引入 time 模块
 
 def update():
     for episode in range(100):
         # initial observation
-        observation = env.reset()
+        observation = env.reset() # 重置环境，获取初始观察值
 
         while True:
             # fresh env
@@ -39,6 +39,11 @@ def update():
 
             # break while loop when end of this episode
             if done:
+                # --- 添加验证代码 ---
+                print(f"回合结束！原因：{'吃到金币' if reward == 1 else '掉进陷阱'}")
+                print("等待 1 秒后重置...")
+                time.sleep(0.3) # 强制暂停1秒，让你看清它确实是死在了终点/陷阱里
+                # -------------------
                 break
 
     # end of game
