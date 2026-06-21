@@ -27,7 +27,7 @@ class QLearningTable:
             action = np.random.choice(state_action[state_action == np.max(state_action)].index) # choose the action with the highest Q value
         else:
             # choose random action
-            action = np.random.choice(self.actions)
+            action = np.random.choice(self.actions) # explore policy, randomly choose an action
         return action
 
     def learn(self, s, a, r, s_):
@@ -44,5 +44,4 @@ class QLearningTable:
             # append new state to q table
             self.q_table = pd.concat(
                             [self.q_table,
-                             pd.Series([0]*len(self.actions), index=self.q_table.columns, name=state).to_frame().T]
-)
+                             pd.Series([0]*len(self.actions), index=self.q_table.columns, name=state).to_frame().T]) # 添加新状态到Q表，初始化Q值为0
